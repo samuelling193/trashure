@@ -1,5 +1,7 @@
+console.log("trashure client js successfully connected")
+
 function getMap() {
-    var map = new Microsoft.Maps.Map('#root', {
+    var map = new Microsoft.Maps.Map('#map', {
         center: new Microsoft.Maps.Location(-37.7989538, 144.9597395)
     });
     
@@ -11,4 +13,5 @@ function getMap() {
         subTitle: 'City Center',
         text: '1'
     })
+
 }
