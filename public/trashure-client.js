@@ -14,4 +14,13 @@ function getMap() {
         text: '1'
     })
 
+
+    Microsoft.Maps.Events.addHandler(pin, 'click', (e) => {
+        let getInformationAboutItem = e.target._options.title
+        console.log(getInformationAboutItem)
+        document.querySelector('.description-of-item').textContent = getInformationAboutItem
+    })
+    
+    // Add the pushpin to the map
+    map.entities.push(pin);
 }
