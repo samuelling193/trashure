@@ -17,9 +17,42 @@ app.set('view engine', 'ejs')
 
 app.use(express.static('public'))
 
+// passport.use(new LocalStrategy(
+//     function(username, password, done) {
+//         User.findOne({ username: username }, function (err, user) {
+//             if (err) { return done(err); }
+//             if (!user) {
+//             return done(null, false, { message: 'Incorrect username.' });
+//             }
+//             if (!user.validPassword(password)) {
+//             return done(null, false, { message: 'Incorrect password.' });
+//             }
+//             return done(null, user);
+//         });
+//     }
+// ));
+
+
 app.get('/login', (req, res)=>{
     res.render('log-in')
 })
+
+// Passport strategy for authenticating with a username and password
+// user put their username and password
+// post method
+// compare the data with db, authentication
+// login -> session mode (in session branch)
+// app.post('/login',
+//   passport.authenticate('local'),
+//   function(req, res) {
+//     // If this function gets called, authentication was successful.
+//     // `req.user` contains the authenticated user.
+//     res.redirect('/users/' + req.user.username);
+// });
+
+// app.post('/login',
+// passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
+
 
 app.get('/signup', (req, res)=>{
     res.render('sign-up')
