@@ -15,6 +15,7 @@ create table trashure_items (
     id serial primary key,
     owner_id integer references users(id),
     name text,
+    item_type text,
     lat decimal,
     long decimal,
     address text,
@@ -28,7 +29,7 @@ create table trashure_items (
 
 create table comments (
     id serial primary key,
-    owner_id integer references users(id),
+    poster_id integer references users(id),
     item_id integer references trashure_items(id),
     content text, 
     deletion_status boolean not null default false
