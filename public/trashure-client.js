@@ -2,10 +2,11 @@ console.log("trashure client js successfully connected")
 
 function getMap() {
     var map = new Microsoft.Maps.Map('#map', {
+                                            // user location 
         center: new Microsoft.Maps.Location(-37.7989538, 144.9597395)
     });
     
-    // var center = map.getCenter()
+    var center = map.getCenter()
 
     // Create custom Pushpin
     var pin  = new Microsoft.Maps.Pushpin(center, {
@@ -14,11 +15,15 @@ function getMap() {
         text: '1'
     })
 
+    // Fetches information to be displayed
+    const getInformationAboutItem = (e) => { 
+        // Needs the right information
+        return(e.target._options.title) 
+    }
 
+    // Handles the click event of a pin, note changes textContent of Div to display it
     Microsoft.Maps.Events.addHandler(pin, 'click', (e) => {
-        let getInformationAboutItem = e.target._options.title
-        console.log(getInformationAboutItem)
-        document.querySelector('.description-of-item').textContent = getInformationAboutItem
+        document.querySelector('.description-of-item').textContent = `${getInformationAboutItem(e)}`
     })
     
     // Add the pushpin to the map
