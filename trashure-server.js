@@ -25,7 +25,7 @@ app.get('/signup', (req, res)=>{
     res.render('sign-up')
 })
 
-// insert the data when user sign-up
+// insert the data to db when user sign-up
 // encrypted password will be stored to db
 app.post('/signup', (req, res)=>{
 
