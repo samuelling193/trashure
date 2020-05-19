@@ -3,10 +3,12 @@ const app = express()
 const port = 8080
 // const pg = require('pg')
 
-app.set(engine, 'ejs')
+app.set('view engine', 'ejs')
 
-app.get('/', (req, res) => {
-    res.render('index')
+app.use(express.static('public'))
+
+app.get('/login', (req, res)=>{
+    res.render('log-in')
 })
 
 app.listen(port, () => {
