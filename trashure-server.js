@@ -15,6 +15,10 @@ app.get('/signup', (req, res)=>{
     res.render('sign-up')
 })
 
+app.get('/myitems', (req,res)=>{
+    res.render('view-my-items')
+})
+
 app.listen(port, () => {
     console.log(`listening on ${port}`)
 })
