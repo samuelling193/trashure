@@ -9,7 +9,7 @@
 body{
     background-color: mistyrose;
 }
-
+/* sign-up.ejs css */
 .signup-box{
     background-color: white;
     width: 50%;
@@ -68,4 +68,36 @@ body{
 
 .form-h1 {
     text-align: center;
+}
+/* log-in.ejs css */
+
+
+/* log-in.ejs css */
+.login-box{
+    width: 40%;
+    border: 1px solid grey;
+    margin: 30px auto;
+    background-color: white;
+}
+
+.login-box h1{
+    text-align: center;
+}
+
+.login-input-box form{
+    display: grid;
+    width: 70%;
+    grid-gap: 5px;
+    margin: 0 auto;
+}
+
+.login-input-box input{
+    padding: 5px;
+}
+
+.login-input-box button{
+    width: 50%;
+    padding: 5px;
+    margin: 0 auto 10px;
+    border: 1px solid black;
 }
