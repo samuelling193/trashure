@@ -80,8 +80,8 @@ app.post('/new', (req,res) => {
 app.get('/update/:id', (req,res) => {
 
     db.query('SELECT * FROM trashure_items WHERE id = $1;', [req.params.id], (err, dbRes) => {
-        // need help to get data from db for specific item id
-        res.render('edit-item', { item: dbRes})
+        // res.json(dbRes.rows)
+        res.render('edit-item', { item: dbRes.rows })
     })
 })
 
@@ -92,7 +92,7 @@ app.post('/update/:id', (req, res) => {
 
     db.query(sql, [req.body.name, req.body.item_type, req.body.latitude, req.body.longitude, req.body.address, req.body.image_url, req.body.pickup_date,req.body.pickup_start_time,req.body.pickup_end_time], (err,dbRes) => {
         res.json({
-           owner_id: 1, 
+        //    owner_id: 1, 
            name: req.body.name,
            item_type: req.body.item_type,
            lat: req.body.latitude,

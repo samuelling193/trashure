@@ -25,7 +25,7 @@ const reverseGeocode = function(e) {
             location: e.location,
             callback: function (res) {
                 //Tell the user the name of the result.
-                const itemLocation = document.querySelector('.item-location')
+                // const itemLocation = document.querySelector('.item-location')
                 itemAddress.value = res.name;
                 itemLatitude.value = res.location.latitude;
                 itemLongitude.value = res.location.longitude;
