@@ -105,7 +105,6 @@ app.post('/new', (req,res) => {
         // res.redirect('/')
     })
 })
-<<<<<<< HEAD
 
 app.get('/update/:id', (req,res) => {
 
@@ -161,5 +160,3 @@ app.get('/api/users/:id', (req, res) => {
 app.listen(port, () => {
     console.log(`listening on ${port}`)
 })
-=======
->>>>>>> 3029e15b0fb37ccc677aafd413543f53829cccba

@@ -27,8 +27,6 @@ function getMap() {
                                             // user location 
         center: new Microsoft.Maps.Location(-37.7989538, 144.9597395)
     });
-    
-    var pin 
 
     var center = map.getCenter()
 
@@ -45,6 +43,6 @@ function getMap() {
             
             // Handles the click event of a pin, note changes textContent of Div to display it
             Microsoft.Maps.Events.addHandler(pin, 'click', handlePinClick)
-            })
         })
+    })
 }
