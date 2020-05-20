@@ -7,7 +7,6 @@ insert into users (username, name, email, encrypted_password, lat, long, avatar_
 insert into users (username, name, email, encrypted_password, lat, long, avatar_url) values ('furniturelover', 'Jane Doe', 'emma@home.com', '$2b$10$r8zXFvR6OacAyaU8uEeQIe/pjZwCiKc4MoasuUfXhXrqXk4zgiB/2', -37.8149745, 144.9552722, 'avatar_url');
 
 
-
 -- TRASHURE ITEMS
 
 insert into trashure_items (owner_id, name, lat, long, address, image_url

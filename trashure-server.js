@@ -2,64 +2,60 @@ const express = require('express')
 const app = express()
 const port = 8080
 const db = require('./models/config')
+// const user = require('./models/users')
 // const pg = require('pg')
 // installed bcrypt, express-session, passport-local, bodyParser
 const bcrypt = require('bcrypt')
 const saltRounds = 10;
-var session = require('express-session')
+const session = require('express-session')
+// dependencies for login, installed passport, morgan dependencies for login
+const passport = require('passport')
+const Strategy = require('passport-local').Strategy;
 
-var bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 
-// when you set it from the form  // .json from ajax(axios) request
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.set('view engine', 'ejs')
 
 app.use(express.static('public'))
 
-// passport.use(new LocalStrategy(
-//     function(username, password, done) {
-//         User.findOne({ username: username }, function (err, user) {
-//             if (err) { return done(err); }
-//             if (!user) {
-//             return done(null, false, { message: 'Incorrect username.' });
-//             }
-//             if (!user.validPassword(password)) {
-//             return done(null, false, { message: 'Incorrect password.' });
-//             }
-//             return done(null, user);
-//         });
-//     }
-// ));
+passport.use(new Strategy(
+    function(username, password, cb) {
+        db.query('select * from users where username = $1;', [username]).then(function(dbRes){
+            cb(null, dbRes.rows[0])
+        })
+}));
 
+passport.serializeUser(function(user, cb) {
+    cb(null, user.id);
+});
+  
+passport.deserializeUser(function(id, cb) {
+    db.query('select * from users where id = $1;', [id]).then(function(dbRes){
+        cb(null, dbRes.rows[0])
+    })
+});
+
+app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.get('/login', (req, res)=>{
     res.render('log-in')
 })
 
-// Passport strategy for authenticating with a username and password
-// user put their username and password
-// post method
-// compare the data with db, authentication
-// login -> session mode (in session branch)
-// app.post('/login',
-//   passport.authenticate('local'),
-//   function(req, res) {
-//     // If this function gets called, authentication was successful.
-//     // `req.user` contains the authenticated user.
-//     res.redirect('/users/' + req.user.username);
-// });
-
-// app.post('/login',
-// passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
+app.post('/login', 
+  passport.authenticate('local', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+});
 
 
 app.get('/signup', (req, res)=>{
     res.render('sign-up')
 })
 
-// insert the data to db when user sign-up
-// encrypted password will be stored to db
 app.post('/signup', (req, res)=>{
 
     const hash = bcrypt.hashSync(req.body.password, 10);
@@ -143,5 +139,3 @@ app.post('/update/:id', (req, res) => {
 app.listen(port, () => {
     console.log(`listening on ${port}`)
 })
-
-
