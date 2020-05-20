@@ -71,6 +71,6 @@ function getMap() {
             
             // Handles the click event of a pin, note changes textContent of Div to display it
             Microsoft.Maps.Events.addHandler(pin, 'click', handlePinClick)
+            })
         })
-    })
 }
