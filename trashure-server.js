@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const port = 8080
 const db = require('./models/config')
+const methodOverride = require('method-override')
 // const user = require('./models/users')
 // const pg = require('pg')
 const bcrypt = require('bcrypt')
@@ -13,6 +14,7 @@ const Strategy = require('passport-local').Strategy;
 const bodyParser = require('body-parser')
 
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(methodOverride('_method'))
 
 app.set('view engine', 'ejs')
 
@@ -110,17 +112,15 @@ app.post('/new', (req,res) => {
 app.get('/update/:id', (req,res) => {
 
     db.query('SELECT * FROM trashure_items WHERE id = $1;', [req.params.id], (err, dbRes) => {
-        // res.json(dbRes.rows)
         res.render('edit-item', { item: dbRes.rows })
     })
 })
 
-// didn't solve yet how to get item with specific id
-app.post('/update/:id', (req, res) => {
+app.put('/update/:id', (req, res) => {
 
-    const sql = 'UPDATE trashure_items SET name = $1,item_type = $2, lat = $3, long = $4, address = $5, image_url = $6, pickup_date = $7, pickup_start_time = $8, pickup_end_time = $9 WHERE id = req.params.id;'
+    const sql = 'UPDATE trashure_items SET name = $1,item_type = $2, lat = $3, long = $4, address = $5, image_url = $6, pickup_date = $7, pickup_start_time = $8, pickup_end_time = $9 WHERE id = $10;'
 
-    db.query(sql, [req.body.name, req.body.item_type, req.body.latitude, req.body.longitude, req.body.address, req.body.image_url, req.body.pickup_date,req.body.pickup_start_time,req.body.pickup_end_time], (err,dbRes) => {
+    db.query(sql, [req.body.name, req.body.item_type, req.body.latitude, req.body.longitude, req.body.address, req.body.image_url, req.body.pickup_date,req.body.pickup_start_time,req.body.pickup_end_time, req.params.id], (err,dbRes) => {
         res.json({
         //    owner_id: 1, 
            name: req.body.name,
@@ -135,7 +135,6 @@ app.post('/update/:id', (req, res) => {
         })
     })
 })
-
 
 app.get('/api/trashure_items', (req, res) => {
     db.query('select * from trashure_items;', (err, dbRes) => {
@@ -161,4 +160,3 @@ app.get('/api/users/:id', (req, res) => {
 app.listen(port, () => {
     console.log(`listening on ${port}`)
 })
-

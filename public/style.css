@@ -127,3 +127,6 @@ body{
     display: table;
 }
 
+.nav-icon {
+    width: 50px;
+}
