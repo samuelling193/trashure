@@ -1,0 +1,41 @@
+.create-form-div, .update-form-div {
+    background-color: rgb(241, 237, 237);
+    box-shadow:         1px 0px 40px 0px rgba(78, 108, 246, 0.99);
+    min-width: 600px;
+}
+
+.create-form-div input, .update-form-div input{
+    height: 20px;
+    border-radius: 3px;
+    border: 0.5px solid rgb(180, 179, 179);
+    padding: 5px;
+    font-size: 1em;
+}
+
+.item-map {
+    border: 1px solid rgb(180, 179, 179);
+    border-radius: 3px;
+}
+
+.create-btn, .update-btn {
+    width: 30%;
+    margin: 10px auto;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 3px;
+    font-size: 1.25em;
+    background-color: aquamarine;
+}
+
+.create-btn:hover, .update-btn:hover {
+    background-color: rgb(82, 199, 160);
+    cursor: pointer;
+}
+
+.selection {
+    height: 25px;
+    width: 310px;
+    margin: 0;
+    font-size: 1em;
+}
+

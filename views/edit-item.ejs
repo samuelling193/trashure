@@ -5,33 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Trashure Item</title>
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/style2.css">
     <script type='text/javascript'
     src='http://www.bing.com/api/maps/mapcontrol?callback=getMap&key=AuewOzxuyMxFiwOpCiEiYyNsck-yIwg3nBqGlLukoPc6gZm-v9Eiyw3eBGpPPTDw' 
     async defer></script>
 </head>
 <body>
+    <%=item[0].pickup_date%>
     <h1 class="form-h1">Update Item</h1>
     <div class="update-form-div">
         <form class="update-form" action="/update/<%=item[0].id%>?_method=PUT"  method="POST">
             <input type="hidden" name="_method" value="PUT">
             <div>
-                <label for="">Name: </label>
+                <label for="">Trashure Title: </label>
                 <input type="text" class="item-name" name="name" value="<%=item[0].name%>">
             </div>
             <div>
-                <label for="">Item type: </label>
-                <select name="item_type" id="">
-                    <option value="">Select type</option>
-                    <option value="furniture">Furniture</option>
-                    <option value="book">Book</option>
-                    <option value="food">Food</option>
-                    <option value="ticket">Ticket</option>
-                    <option value="ticket">Others</option>
+                <label for="">Trashure Type: </label>
+                
+                <select class="selection" name="item_type" required>
+                    <!-- to keep selected item_type showing before editing item details -->
+                    <% const types = ["Furniture", "Book", "Food", "Ticket", "Others"] %>
+                    <% types.forEach((option, index) => { %>
+                        <% if ((item[0].item_type) == option) { %>
+                        <option value="<%= option %>" <%= "selected"%>><%= option %></option>
+                        <% } else  { %>
+                        <option value="<%= option %>"><%= option %></option>
+                        <% } %>  
+                    <% }) %>
                 </select>
             </div>
             <div>
                 <label for="">Place the pin where the item is located</label>
-                <input type="text" class="item-location" name="address" value="<%= item[0].address%>">
+                <input type="text" class="item-location" name="address" readonly placeholder="address will be displayed here" value="<%= item[0].address%>">
                 <input type="hidden" name="latitude" class="lat">
                 <input type="hidden" name="longitude" class="long">
                 <div class="item-map"></div>
@@ -41,18 +47,18 @@
                 <input type="text" class="image-url" name="image_url" value="<%=item[0].image_url%>">
             </div>
             <div>
-                <label for="">Pick up Date</label>
+                <label for="">Pickup Date: </label>
                 <input type="date" class="pickup-date" name="pickup_date" value="<%=item[0].pickup_date%>">
             </div>
             <div>
-                <label for="">Pick up Time, from</label>
+                <label for="">Pickup Time, from</label>
                 <input type="time" class="pickup_start_time" name="pickup_start_time" value="<%=item[0].pickup_start_time%>">
             </div>
             <div>
                 <label for="">Pick up Time, to</label>
                 <input type="time" class="pickup_end_time" name="pickup_end_time" value="<%=item[0].pickup_end_time%>">
             </div>
-            <button class="update-item-btn">Submit Changes</button> 
+            <button class="update-btn">Submit Changes</button> 
         </form>
     </div>
     <script src="/item.js"></script>

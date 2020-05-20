@@ -1,15 +1,18 @@
-console.log('item.js is linked');
-const itemAddress = document.querySelector('.item-location');
-const itemLatitude = document.querySelector('.lat');
-const itemLongitude = document.querySelector('.long')
+console.log('item.js is linked')
 
-var map, searchManager, address 
+const itemAddress = document.querySelector('.item-location')
+const itemLatitude = document.querySelector('.lat')
+const itemLongitude = document.querySelector('.long')
+const itemLocation = document.querySelector('.item-location')
+
+var map, searchManager, address, infobox 
 var item_location = {}
 
 const reverseGeocode = function(e) {
     itemAddress.value = '';
+    // infobox.setMap(null)
     if (map.entities != []) {
-        map.entities.clear();
+        map.entities.clear();        
     }
     //If search manager is not defined, load the search module.
     if (!searchManager) {
@@ -21,20 +24,22 @@ const reverseGeocode = function(e) {
     } else {
         
         var searchRequest = {
-            // loca arguement to be passed in
+            // local arguement to be passed in
             location: e.location,
             callback: function (res) {
                 //Tell the user the name of the result.
-                // const itemLocation = document.querySelector('.item-location')
                 itemAddress.value = res.name;
                 itemLatitude.value = res.location.latitude;
                 itemLongitude.value = res.location.longitude;
-                // item_location["latitude"] = res.location.latitude;
-                // item_location["longitude"] = res.location.longitude;
-                // item_location["address"] = res.name;
-                // // console.log(item_location)
-                // return item_location
                 
+                infobox = new Microsoft.Maps.Infobox(e.location, { 
+                    title: 'Address', 
+                    description: res.name, 
+                    latitude: res.location.latitude,
+                    longitude: res.location.longitude
+                });
+                infobox.setMap(map);
+                setTimeout(function () { infobox.setMap(null) }, 2000);
             },
             errorCallback: function (e) {
                 //If there is an error, alert the user about it.
@@ -55,7 +60,6 @@ const reverseGeocode = function(e) {
     }
 }
 
-
 function getMap() {
     map = new Microsoft.Maps.Map('.item-map', {
                                             // user location 
@@ -67,4 +71,3 @@ function getMap() {
     })
 }
 
-    

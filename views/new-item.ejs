@@ -5,53 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trashure Item</title>
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/style2.css">
     <script type='text/javascript'
     src='http://www.bing.com/api/maps/mapcontrol?callback=getMap&key=AuewOzxuyMxFiwOpCiEiYyNsck-yIwg3nBqGlLukoPc6gZm-v9Eiyw3eBGpPPTDw' 
     async defer></script>
 </head>
 <body>
-    <h1 class="form-h1">Create New Item</h1>
+    <% d = new Date()%>
+    <%month = '' + (d.getMonth() + 1)%>
+    <%day = '' + d.getDate()%>
+    <%year = d.getFullYear()%>
+    <%if (month.length < 2) %> 
+        <% { month = '0' + month }%>
+    <%=[year, month, day].join('-')%>
+
+    <h1 class="form-h1">Create New Trashure</h1>
     <div class="create-form-div">
         <form class="create-form" action="/new" method="post">
             <div>
-                <label for="">Name: </label>
+                <label for="">Trashure Title: </label>
                 <input type="text" class="item-name" name="name">
             </div>
             <div>
-                <label for="">Item type: </label>
-                <select name="item_type" id="">
-                    <option value="">Select type</option>
-                    <option value="furniture">Furniture</option>
-                    <option value="book">Book</option>
-                    <option value="food">Food</option>
-                    <option value="ticket">Ticket</option>
-                    <option value="ticket">Others</option>
+                <label for="">Trashure Type: </label>
+                <select name="item_type" class="selection">
+                    <option value="">-- Select type --</option>
+                    <option value="Furniture">Furniture</option>
+                    <option value="Book">Book</option>
+                    <option value="Food">Food</option>
+                    <option value="Ticket">Ticket</option>
+                    <option value="Others">Others</option>
                 </select>
             </div>
             <div>
                 <label for="">Place the pin where the item is located</label>
-                <input type="text" class="item-location" name="address">
+                <input type="text" class="item-location" name="address" readonly placeholder="address will be displayed here">
                 <input type="hidden" name="latitude" class="lat">
                 <input type="hidden" name="longitude" class="long">
                 <div class="item-map"></div>
             </div>
             <div>
-                <label for="">Image URL</label>
+                <label for="">Quantity: </label>
+                <input type="text" class="quantity" name="quantity">
+            </div>
+            <div>
+                <label for="">Image URL: </label>
                 <input type="text" class="image-url" name="image_url">
             </div>
             <div>
-                <label for="">Pick up Date</label>
-                <input type="date" class="pickup-date" name="pickup_date">
+                <label for="">Pickup Date: </label>
+                <input type="date" class="pickup-date" name="pickup_date" 
+                min="<%=[year, month, day].join('-')%>"  value="<%=[year, month, day].join('-')%>">
             </div>
             <div>
-                <label for="">Pick up Time, from</label>
+                <label for="">Pickup Time, from: </label>
                 <input type="time" class="pickup_start_time" name="pickup_start_time">
             </div>
             <div>
-                <label for="">Pick up Time, to</label>
+                <label for="">Pickup Time, to: </label>
                 <input type="time" class="pickup_end_time" name="pickup_end_time">
             </div>
-            <button class="create-item-btn">Publish the Item</button> 
+            <button class="create-btn">Publish the Trashure</button> 
         </form>
     </div>
     <script src="/item.js"></script>
