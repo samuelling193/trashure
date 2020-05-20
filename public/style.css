@@ -46,7 +46,7 @@ body{
 
 .create-form-div, .update-form-div {
     border: 1px solid grey;
-    border-radius: 8px;
+    border-radius: 10px;
     text-align: center;
     margin: 50px;
 }
@@ -63,7 +63,7 @@ body{
 }
 
 .create-form input, .update-form input {
-    width: 200px;
+    width: 300px;
 }
 
 .form-h1 {
