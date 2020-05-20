@@ -101,3 +101,7 @@ body{
     margin: 0 auto 10px;
     border: 1px solid black;
 }
+
+.nav-icon {
+    width: 50px;
+}
