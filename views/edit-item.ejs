@@ -11,10 +11,9 @@
     async defer></script>
 </head>
 <body>
-    <%=item[0].pickup_date%>
     <h1 class="form-h1">Update Item</h1>
     <div class="update-form-div">
-        <form class="update-form" action="/update/<%=item[0].id%>?_method=PUT"  method="POST">
+        <form class="update-form" action="/item/<%=item[0].id%>?_method=PUT"  method="POST">
             <input type="hidden" name="_method" value="PUT">
             <div>
                 <label for="">Trashure Title: </label>
@@ -41,6 +40,10 @@
                 <input type="hidden" name="latitude" class="lat">
                 <input type="hidden" name="longitude" class="long">
                 <div class="item-map"></div>
+            </div>
+            <div>
+                <label for="">Quantity: </label>
+                <input type="text" class="quantity" name="quantity" value="<%=item[0].quantity%>">
             </div>
             <div>
                 <label for="">Image URL</label>

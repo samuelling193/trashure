@@ -17,11 +17,11 @@
     <%year = d.getFullYear()%>
     <%if (month.length < 2) %> 
         <% { month = '0' + month }%>
-    <%=[year, month, day].join('-')%>
+    <%[year, month, day].join('-')%>
 
     <h1 class="form-h1">Create New Trashure</h1>
     <div class="create-form-div">
-        <form class="create-form" action="/new" method="post">
+        <form class="create-form" action="/item" method="post">
             <div>
                 <label for="">Trashure Title: </label>
                 <input type="text" class="item-name" name="name">
