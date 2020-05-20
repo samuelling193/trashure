@@ -1,15 +1,25 @@
-<h2>View my items</h2>
-<!-- checking the items user posted -->
-<!-- using user session fetch item table using user_id -->
-<!-- select * from items where user_id =  -->
-<!-- it depends on how many items user posted -->
-<!-- it will include image of the item and details -->
-<!-- include the update and delete buttons to redirect to the update form -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <h2>View my items</h2>
+    
+    <% items.forEach(function(item){ %>
+        <p><%= item.name %></p>
+        <img src="<%= item.image_url%>" alt="">
+    <% }); %>
 
 
+    
+    <h2>Reserved</h2>
+    
+</body>
+</html>
 
-
-<h2>Reserved</h2>
-<!-- displaying what that user has reserved -->
-<!-- fetch the data from item table where the reserve status is active and from that user -->
-<!-- it will include image of the item and details -->

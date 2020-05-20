@@ -75,8 +75,11 @@ app.post('/signup', (req, res)=>{
 
 })
 
-app.get('/myitems', (req,res)=>{
-    res.render('view-my-items')
+app.get('/myitems/:owner_id', (req,res)=>{
+    db.query('select * from trashure_items where owner_id = $1;', [req.params.owner_id], (err, dbRes)=>{
+        // res.json(dbRes.rows)
+        res.render('view-my-items', {items: dbRes.rows})
+    })
 })
 
 app.get('/new', (req, res) => {
