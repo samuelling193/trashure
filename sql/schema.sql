@@ -1,11 +1,15 @@
+drop database trashure;
+
 create database trashure;
+
+\c trashure
 
 create table users (
     id serial primary key,
     username text,
     name text,
     email text,
-    password text,
+    encrypted_password text,
     lat decimal,
     long decimal,
     avatar_url text
