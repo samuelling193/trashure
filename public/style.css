@@ -44,28 +44,28 @@ body{
     text-align: center;
 }
 
-.create-form-div {
+.create-form-div, .update-form-div {
     border: 1px solid grey;
     border-radius: 8px;
     text-align: center;
     margin: 50px;
 }
 
-.create-form {
+.create-form, .update-form {
     margin: 20px;
     padding: 20px auto;
 }
 
-.create-form label {
+.create-form label, .update-form label {
     display: inline-block;
     width: 300px;
     text-align: right;
 }
 
-.create-form input {
+.create-form input, .update-form input {
     width: 200px;
 }
 
-.create-h1 {
+.form-h1 {
     text-align: center;
 }
