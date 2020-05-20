@@ -105,7 +105,6 @@ app.post('/new', (req,res) => {
         // res.redirect('/')
     })
 })
-<<<<<<< HEAD
 
 app.get('/update/:id', (req,res) => {
 
@@ -137,8 +136,28 @@ app.post('/update/:id', (req, res) => {
 })
 
 
+app.get('/api/trashure_items', (req, res) => {
+    db.query('select * from trashure_items;', (err, dbRes) => {
+        res.json(dbRes.rows)
+    })
+})
+
+app.get('/api/trashure_items/:id', (req, res) => {
+    db.query('select * from trashure_items where id =$1;', [req.params.id],     (err, dbRes) => {
+        res.json(dbRes.rows)
+    })
+})
+
+app.get('/api/users/:id', (req, res) => {
+    db.query(
+        'select * from users where id = $1;', 
+        [req.params.id], 
+        (err, dbRes) => {
+            res.json(dbRes.rows)
+    })
+})
+
 app.listen(port, () => {
     console.log(`listening on ${port}`)
 })
-=======
->>>>>>> 3029e15b0fb37ccc677aafd413543f53829cccba
+
