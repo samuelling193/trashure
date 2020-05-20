@@ -34,14 +34,18 @@ function getMap() {
 
     axios.get(url).then(res => {
         res.data.forEach(function(data) {
-            var location = { latitude: data.lat, longitude: data.lng}
-            var pin  = new Microsoft.Maps.Pushpin(location, {
+            var location = { latitude: data.lat, longitude: data.long}
+            pin = new Microsoft.Maps.Pushpin(location, {
                 title: data.name,
-                itemId: data.id
+                text: `${data.id}`
             })
             map.entities.push(pin)
+            
+            // Handles the click event of a pin, note changes textContent of Div to display it
+            Microsoft.Maps.Events.addHandler(pin, 'click', handlePinClick)
         })
     })
+    
 
     // Create custom Pushpin
     // var pin  = new Microsoft.Maps.Pushpin(center, {

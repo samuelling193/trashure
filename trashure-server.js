@@ -140,13 +140,6 @@ app.get('/api/trashure_items', (req, res) => {
     db.query('select * from trashure_items;', (err, dbRes) => {
         res.json(dbRes.rows)
     })
-<<<<<<< HEAD
-=======
-})
-
-app.listen(port, () => {
-    console.log(`listening on ${port}`)
->>>>>>> downloading new seed and schema
 })
 
 app.get('/api/trashure_items/:id', (req, res) => {
@@ -167,3 +160,4 @@ app.get('/api/users/:id', (req, res) => {
 app.listen(port, () => {
     console.log(`listening on ${port}`)
 })
+
