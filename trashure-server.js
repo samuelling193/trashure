@@ -115,7 +115,7 @@ app.get('/update/:id', (req,res) => {
 })
 
 // didn't solve yet how to get item with specific id
-app.post('/update/:id', (req, res) => {
+app.put('/update/:id', (req, res) => {
 
     const sql = 'UPDATE trashure_items SET name = $1,item_type = $2, lat = $3, long = $4, address = $5, image_url = $6, pickup_date = $7, pickup_start_time = $8, pickup_end_time = $9 WHERE id = req.params.id;'
 

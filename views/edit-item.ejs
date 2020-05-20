@@ -14,7 +14,7 @@
     <h1 class="form-h1">Update Item</h1>
     <div class="update-form-div">
         <form class="update-form" action="/update/<%=item[0].id%>" method="post">
-            <!-- <input type="hidden" name="_method" value="put"> -->
+            <input type="hidden" name="_method" value="put">
             <div>
                 <label for="">Name: </label>
                 <input type="text" class="item-name" name="name" value="<%=item[0].name%>">
@@ -32,7 +32,7 @@
             </div>
             <div>
                 <label for="">Place the pin where the item is located</label>
-                <input type="text" class="item-location" name="address">
+                <input type="text" class="item-location" name="address" value="<%= item[0].address%>">
                 <input type="hidden" name="latitude" class="lat">
                 <input type="hidden" name="longitude" class="long">
                 <div class="item-map"></div>
