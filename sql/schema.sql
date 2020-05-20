@@ -20,6 +20,7 @@ create table trashure_items (
     owner_id integer references users(id),
     name text,
     item_type text,
+    quantity text,
     lat decimal,
     long decimal,
     address text,
