@@ -5,11 +5,9 @@ const db = require('./models/config')
 const methodOverride = require('method-override')
 // const user = require('./models/users')
 // const pg = require('pg')
-// installed bcrypt, express-session, passport-local, bodyParser
 const bcrypt = require('bcrypt')
 const saltRounds = 10;
 const session = require('express-session')
-// dependencies for login, installed passport, morgan dependencies for login
 const passport = require('passport')
 const Strategy = require('passport-local').Strategy;
 
@@ -63,7 +61,7 @@ app.post('/signup', (req, res)=>{
     const hash = bcrypt.hashSync(req.body.password, 10);
 
     db.query(
-        'insert into users (username, name, email, password, avatar_url) values ($1, $2, $3, $4, $5)', [req.body.username, req.body.name, req.body.email, hash, req.body.avatar_url], (err, dbRes)=>{
+        'insert into users (username, name, email, encrypted_password, avatar_url) values ($1, $2, $3, $4, $5)', [req.body.username, req.body.name, req.body.email, hash, req.body.avatar_url], (err, dbRes)=>{
 
             res.json({
                 username: req.body.username, 
@@ -72,13 +70,16 @@ app.post('/signup', (req, res)=>{
                 avatar_url: req.body.avatar_url
             })
             
-            res.redirect('/')
-    })
+        })
+        res.redirect('/')
 
 })
 
-app.get('/myitems', (req,res)=>{
-    res.render('view-my-items')
+app.get('/myitems/:owner_id', (req,res)=>{
+    db.query('select * from trashure_items where owner_id = $1;', [req.params.owner_id], (err, dbRes)=>{
+        // res.json(dbRes.rows)
+        res.render('view-my-items', {items: dbRes.rows})
+    })
 })
 
 app.get('/new', (req, res) => {

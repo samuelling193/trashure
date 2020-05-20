@@ -1,15 +1,39 @@
-<h2>View my items</h2>
-<!-- checking the items user posted -->
-<!-- using user session fetch item table using user_id -->
-<!-- select * from items where user_id =  -->
-<!-- it depends on how many items user posted -->
-<!-- it will include image of the item and details -->
-<!-- include the update and delete buttons to redirect to the update form -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
 
+    <h2>View my items</h2>
 
+    <% items.forEach(function(item){ %>
+        <div class = "my-items-box">
+            <img src="<%= item.image_url%>" alt="">
+            <div class = "item-box-text">
+                <p>Name: <%= item.name %></p>
+                <p>Item type: <%= item.item_type %></p>
+                <p>Pickup date: <%= item.pickup_date %></p>
+                <p>Item status: <%= item.status %></p>
+            </div>
+            <div>
+                <button>update</button>
+            </div>
+        </div>
+            <% }); %>
+    
+    <h2>Reserved</h2>
+    <!-- what that user has reserved -->
+    <!-- fetch the item this user reserved -->
+    <!-- in server.js -->
+    <!-- 'select * from reservations where owner_id = $1;',[req.params.owner_id], (err, dbRes)=>{
+        // res.json(dbRes.rows)
+        res.render('view-my-items', {reservations: dbRes.rows})
+    }) -->
+</body>
+</html>
 
-
-<h2>Reserved</h2>
-<!-- displaying what that user has reserved -->
-<!-- fetch the data from item table where the reserve status is active and from that user -->
-<!-- it will include image of the item and details -->
