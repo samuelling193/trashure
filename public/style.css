@@ -103,3 +103,27 @@ body{
 }
 
 /* view-my-items.ejs css */
+.my-items-box{
+    border: 1px solid grey;
+    width: 80%;
+    margin: 10px auto;
+}
+
+.my-items-box img{
+    width: 30%;
+    float: left;
+}
+
+.item-box-text{
+    width: 40%;
+    display: inline;
+    float: left;
+    margin-left: 40px;
+}
+
+.my-items-box::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
