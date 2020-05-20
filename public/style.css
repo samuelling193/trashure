@@ -43,7 +43,6 @@ body{
 .text-in-signup{
     text-align: center;
 }
-<<<<<<< HEAD
 
 .create-form-div, .update-form-div {
     border: 1px solid grey;
@@ -71,8 +70,7 @@ body{
     text-align: center;
 }
 /* log-in.ejs css */
-=======
->>>>>>> enable login and session
+
 
 /* log-in.ejs css */
 .login-box{
