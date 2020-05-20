@@ -39,10 +39,10 @@ insert into trashure_items (owner_id, name, lat, long, address, image_url
 
 -- COMMENTS
 
- insert into comments (poster_id, item_id, content) values (2, 1, 'Chocolate brownie is my favourite');
+insert into comments (poster_id, item_id, content) values (2, 1, 'Chocolate brownie is my favourite');
 
- insert into comments (poster_id, item_id, content) values (2, 1, 'I love this band. Cannot beleive you have extra tickets. See you at 4pm');
+insert into comments (poster_id, item_id, content) values (2, 1, 'I love this band. Cannot beleive you have extra tickets. See you at 4pm');
 
- insert into comments (poster_id, item_id, content) values (1, 3, 'I am going to build a bed out of these pallets!');
+insert into comments (poster_id, item_id, content) values (1, 3, 'I am going to build a bed out of these pallets!');
 
- insert into comments (poster_id, item_id, content) values (1, 4, 'I love this coffee table. I will take it!');
+insert into comments (poster_id, item_id, content) values (1, 4, 'I love this coffee table. I will take it!');
