@@ -1,6 +1,10 @@
 #map {
     height: 300px;
 }
+.item-map {
+    height: 300px;
+    margin: 10px;
+}
 
 body{
     background-color: mistyrose;
@@ -37,5 +41,31 @@ body{
 }
 
 .text-in-signup{
+    text-align: center;
+}
+
+.create-form-div {
+    border: 1px solid grey;
+    border-radius: 8px;
+    text-align: center;
+    margin: 50px;
+}
+
+.create-form {
+    margin: 20px;
+    padding: 20px auto;
+}
+
+.create-form label {
+    display: inline-block;
+    width: 300px;
+    text-align: right;
+}
+
+.create-form input {
+    width: 200px;
+}
+
+.create-h1 {
     text-align: center;
 }
