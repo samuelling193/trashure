@@ -113,6 +113,21 @@ app.get('/api/trashure_items', (req, res) => {
     })
 })
 
+app.get('/api/trashure_items/:id', (req, res) => {
+    db.query('select * from trashure_items where id =$1;', [req.params.id],     (err, dbRes) => {
+        res.json(dbRes.rows)
+    })
+})
+
+app.get('/api/users/:id', (req, res) => {
+    db.query(
+        'select * from users where id = $1;', 
+        [req.params.id], 
+        (err, dbRes) => {
+            res.json(dbRes.rows)
+    })
+})
+
 app.listen(port, () => {
     console.log(`listening on ${port}`)
 })
