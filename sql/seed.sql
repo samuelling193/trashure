@@ -1,10 +1,10 @@
 -- USERS
 
-insert into users (username, name, email, encypted_password, lat, long, avatar_url) values ('ben', 'ben johnson', 'ben@home.com', 'encrypted_password', -37.8140692, 144.9487768, 'https://qph.fs.quoracdn.net/main-qimg-8d945bbaf167b063040eca16b0c59cd8.webp');
+insert into users (username, name, email, password, lat, long, avatar_url) values ('ben', 'ben johnson', 'ben@home.com', '$2b$10$r8zXFvR6OacAyaU8uEeQIe/pjZwCiKc4MoasuUfXhXrqXk4zgiB/2', -37.8140692, 144.9487768, 'https://qph.fs.quoracdn.net/main-qimg-8d945bbaf167b063040eca16b0c59cd8.webp');
 
-insert into users (username, name, email, encypted_password, lat, long, avatar_url) values ('sugarlover', 'Jess Smith', 'jess@home.com', 'encrypted_password', -37.8107004, 144.9570023, 'https://pickaface.net/gallery/avatar/unr_example_161122_0416_qss004g.png');
+insert into users (username, name, email, password, lat, long, avatar_url) values ('sugarlover', 'Jess Smith', 'jess@home.com', '$2b$10$r8zXFvR6OacAyaU8uEeQIe/pjZwCiKc4MoasuUfXhXrqXk4zgiB/2', -37.8107004, 144.9570023, 'https://pickaface.net/gallery/avatar/unr_example_161122_0416_qss004g.png');
 
-insert into users (username, name, email, encypted_password, lat, long, avatar_url) values ('furniturelover', 'Jane Doe', 'emma@home.com', 'encrypted_password', -37.8149745, 144.9552722, 'avatar_url');
+insert into users (username, name, email, password, lat, long, avatar_url) values ('furniturelover', 'Jane Doe', 'emma@home.com', '$2b$10$r8zXFvR6OacAyaU8uEeQIe/pjZwCiKc4MoasuUfXhXrqXk4zgiB/2', -37.8149745, 144.9552722, 'avatar_url');
 
 
 
