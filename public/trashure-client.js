@@ -123,19 +123,39 @@ function getMap() {
         axios.get(url).then(res => {
 
             res.data.forEach(function(data) {
+                console.log(data)
                 if (data.status !== 'expired'){
-                    var location = { latitude: data.lat, longitude: data.long}
-                    pin = new Microsoft.Maps.Pushpin(location, {
-                        title: data.name,
-                        text: `${data.id}`
-                    })
-                    map.entities.push(pin)
                     
-                    // Handles the click event of a pin, note changes textContent of Div to display it
-                    Microsoft.Maps.Events.addHandler(pin, 'click', handlePinClick)
+                    if (data.status === 'available'){
+                        var location = { latitude: data.lat, longitude: data.long}
+                        pin = new Microsoft.Maps.Pushpin(location, {
+                            title: data.name,
+                            text: `${data.id}`,
+                            icon: 'https://static.thenounproject.com/png/875681-200.png'
+                        })
+                        map.entities.push(pin)
+
+                        // Handles the click event of a pin, note changes textContent of Div to display it
+                        Microsoft.Maps.Events.addHandler(pin, 'click', handlePinClick)
+                    }
+
+                    if (data.status === 'reserved'){
+                        var location = { latitude: data.lat, longitude: data.long}
+                        pin = new Microsoft.Maps.Pushpin(location, {
+                            title: data.name,
+                            text: `${data.id}`,
+                            icon: 'https://static.thenounproject.com/png/875653-200.png'
+                        })
+                        map.entities.push(pin)
+
+                        // Handles the click event of a pin, note changes textContent of Div to display it
+                        Microsoft.Maps.Events.addHandler(pin, 'click', handlePinClick)
+                    }
+                    
                 }
             })
         })
 
     })    
+  
 }
