@@ -153,3 +153,7 @@ nav {
 .nav-icon {
     width: 50px;
 }
+
+.reserved {
+    background-color: aqua;
+}
