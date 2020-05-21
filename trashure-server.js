@@ -86,15 +86,23 @@ app.get('/logout',
 });
 
 app.get('/myitems', (req,res)=>{
-    db.query('select * from trashure_items where owner_id = $1;', [req.user.id], (err, items)=>{
-        db.query('select * from reservations where requester_id = $1;', [req.user.id], (err, reservations)=>{
-            res.render('view-my-items', {items: items.rows, reservations: reservations.rows})
+    if (!req.user) {
+        res.redirect('/login')
+    } else {
+        db.query('select * from trashure_items where owner_id = $1;', [req.user.id], (err, items)=>{
+            db.query('select * from reservations where requester_id = $1;', [req.user.id], (err, reservations)=>{
+                res.render('view-my-items', {items: items.rows, reservations: reservations.rows})
+            })
         })
-    })
+    }
 })
 
 app.get('/item', (req, res) => {
-    res.render('new-item')
+    if (!req.user) {
+        res.redirect('/login')
+    } else {
+        res.render('new-item')
+    }
 })
 
 app.post('/item', (req,res) => {
