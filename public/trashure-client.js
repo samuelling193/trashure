@@ -1,5 +1,20 @@
 console.log("trashure client js successfully connected")
 
+// convert time Function
+function convertDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+    }
+
 var map, searchManager, address 
 
 //gets user location from browser
@@ -48,9 +63,9 @@ const handlePinClick = function (e) {
         axios.get(url).then(res => {
             document.querySelector(".owner-of-item").textContent = `Owner: ${res.data[0].name}`
         })
-        document.querySelector(".expiration-date-of-item").textContent = `Expiration Date: ${data.expiration_date}`
-        document.querySelector(".pickup-date-of-item").textContent = `Pickup Date: ${data.pickup_date}`
-        document.querySelector(".pickup-time-of-item").textContent = `Pickup Time: ${data.pickup_start_time}`
+        document.querySelector(".expiration-date-of-item").textContent = `Expiration Date: ${convertDate(data.expiration_date)}`
+        document.querySelector(".pickup-date-of-item").textContent = `Pickup Date: ${convertDate(data.pickup_date)}`
+        document.querySelector(".pickup-time-of-item").textContent = `Pickup Time: ${data.pickup_start_time} - ${data.pickup_end_time}`
         })
     })
 }
