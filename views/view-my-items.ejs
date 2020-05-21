@@ -27,13 +27,21 @@
             <% }); %>
     
     <h2>Reserved</h2>
-    <!-- what that user has reserved -->
-    <!-- fetch the item this user reserved -->
-    <!-- in server.js -->
-    <!-- 'select * from reservations where owner_id = $1;',[req.params.owner_id], (err, dbRes)=>{
-        // res.json(dbRes.rows)
-        res.render('view-my-items', {reservations: dbRes.rows})
-    }) -->
+
+    <% reservations.forEach(function(item){ %>
+        <div class = "my-items-box">
+            <img src="<%= reservation.image_url%>" alt="">
+            <div class = "item-box-text">
+                <p>Name: <%= reservation.name %></p>
+                <p>Item type: <%= reservation.item_type %></p>
+                <p>Pickup date: <%= item.pickup_date %></p>
+                <p>Item status: <%= item.status %></p>
+            </div>
+            <div>
+                <button>update</button>
+            </div>
+        </div>
+            <% }); %>
 </body>
 </html>
 
