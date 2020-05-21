@@ -1,4 +1,4 @@
-console.log("trashure client js successfully connected")
+
 
 const reserveBtn = document.querySelector('.reserve-btn')
 const unreserveBtn = document.querySelector('.unreserve-btn')
@@ -20,7 +20,34 @@ function convertDate(date) {
 
 var map, searchManager, address 
 
-//gets user location from browser
+
+const reverseGeocode = function(e) {
+    //If search manager is not defined, load the search module.
+    if (!searchManager) {
+            //Create an instance of the search manager and call the reverseGeocode function again.
+        Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
+            searchManager = new Microsoft.Maps.Search.SearchManager(map);
+            reverseGeocode(e);
+        });
+    } else {
+        var searchRequest = {
+                        // loca arguement to be passed in
+            location: e.location,
+            callback: function (r) {
+                //Tell the user the name of the result.
+                // debugger
+                document.querySelector(".location-of-item").textContent = `Address: ${r.name}`;
+            },
+            errorCallback: function (e) {
+                //If there is an error, alert the user about it.
+                alert("Unable to reverse geocode location.");
+            }
+        };
+        //Make the reverse geocode request.
+        searchManager.reverseGeocode(searchRequest);
+        
+    }
+}
 
 function getLocation(cb) {
   if (navigator.geolocation) {
@@ -67,33 +94,17 @@ const handlePinClick = function (e) {
             document.querySelector(".owner-of-item").textContent = `Owner: ${res.data[0].name}`
         })
         
-        reserveBtn.style.display = 'inherit'
+
         document.querySelector(".expiration-date-of-item").textContent = `Expiration Date: ${convertDate(data.expiration_date)}`
         document.querySelector(".pickup-date-of-item").textContent = `Pickup Date: ${convertDate(data.pickup_date)}`
         document.querySelector(".pickup-time-of-item").textContent = `Pickup Time: ${data.pickup_start_time} - ${data.pickup_end_time}`            
-        
+        if (reserveBtn) {
+            reserveBtn.classList.toggle('hidden')
+            document.querySelector('.trashure-item-id').value = data.id
+        }
         })
     })
 }
-
-reserveBtn.addEventListener('click', (e) => {
-    console.log(e)
-    if (user) {
-        // display Delete Reservation Btn
-        reserveBtn.classList.toggle('hidden')
-        unreserveBtn.classList.toggle('hidden')
-        
-    } else {
-        document.querySelector('.warning-link').classList.toggle('hidden')
-        reserveBtn.style.backgroundColor = 'red'
-        
-    }
-})
-
-unreserveBtn.addEventListener('click', () => {
-    reserveBtn.classList.toggle('hidden')
-    unreserveBtn.classList.toggle('hidden')
-})  
 
 function getMap() {
 
@@ -126,35 +137,5 @@ function getMap() {
             })
         })
 
-    })
-    
-
-    
-}
-const reverseGeocode = function(e) {
-    //If search manager is not defined, load the search module.
-    if (!searchManager) {
-            //Create an instance of the search manager and call the reverseGeocode function again.
-        Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
-            searchManager = new Microsoft.Maps.Search.SearchManager(map);
-            reverseGeocode(e);
-        });
-    } else {
-        var searchRequest = {
-                        // loca arguement to be passed in
-            location: e.location,
-            callback: function (r) {
-                //Tell the user the name of the result.
-                // debugger
-                document.querySelector(".location-of-item").textContent = `Address: ${r.name}`;
-            },
-            errorCallback: function (e) {
-                //If there is an error, alert the user about it.
-                alert("Unable to reverse geocode location.");
-            }
-        };
-        //Make the reverse geocode request.
-        searchManager.reverseGeocode(searchRequest);
-        
-    }
+    })    
 }

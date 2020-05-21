@@ -46,11 +46,12 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: false, save
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 app.get('/', (req, res) => {
     res.render('index', { user: req.user })
 })
 
-app.get('/login', (req, res)=>{
+app.get('/login', (req, res) => {
     res.render('log-in')
 })
 
@@ -61,16 +62,16 @@ app.post('/login',
 });
 
 
-app.get('/signup', (req, res)=>{
+app.get('/signup', (req, res) => {
     res.render('sign-up')
 })
 
-app.post('/signup', (req, res)=>{
+app.post('/signup', (req, res) => {
 
     const hash = bcrypt.hashSync(req.body.password, 10);
 
     db.query(
-        'insert into users (username, name, email, encrypted_password, avatar_url) values ($1, $2, $3, $4, $5)', [req.body.username, req.body.name, req.body.email, hash, req.body.avatar_url], (err, dbRes)=>{
+        'insert into users (username, name, email, encrypted_password, avatar_url) values ($1, $2, $3, $4, $5)', [req.body.username, req.body.name, req.body.email, hash, req.body.avatar_url], (err, dbRes) => {
 
             res.json({
                 username: req.body.username, 
@@ -84,15 +85,23 @@ app.post('/signup', (req, res)=>{
 
 })
 
-app.get('/logout',
-  function(req, res){
-    req.logout();
-    res.redirect('/');
+app.get('/logout', (req, res) => {
+    req.logout()
+    res.redirect('/')
 });
+
+app.post('/reservation', (req, res) => {
+    db.query("UPDATE trashure_items SET status = $1 where id = $2", ['reserved', req.body.item_id])
+    db.query('select * from trashure_items where id = 1$', [req.body.item_id], (err, items) => {
+        db.query('INSERT INTO reservations (owner_id, requester_id, item_id, request_date, request_time) VALUES ($1, $2, $3, $4, $5);', 
+        [items.rows[0].owner_id, req.user.id, req.body.item_id, items.rows[0].request_date, items.rows[0].request_time])
+    })
+    res.redirect('/myitems')
+})
 
 app.get('/myitems',ensureLoggedIn('/login'), (req,res) => {
     db.query('select * from trashure_items where owner_id = $1;', [req.user.id], (err, items)=>{
-        db.query('select * from reservations join trashure_items on (reservations.item_id = trashure_items.id) where requester_id = $1;', [req.user.id], (err, reservations)=>{
+        db.query('select * from reservations join trashure_items on (reservations.item_id = trashure_items.id) where requester_id = $1;', [req.user.id], (err, reservations) => {
             res.render('view-my-items', {items: items.rows, reservations: reservations.rows})
         })
     })
@@ -177,7 +186,7 @@ app.get('/api/users/:id', (req, res) => {
     })
 })
 
-app.get('/api/current_user', (req, res)=>{
+app.get('/api/current_user', (req, res) => {
     res.json(req.user)
 })
 
