@@ -17,6 +17,10 @@
             <div>
                 <h1>Trashure</h1>
             </div>
+            <% if (user) { %>
+            <h1> <%= user.name %> </h1>
+            <% } %>
+
             <div>
                 <form action="/signup">
                     <button>SIGN UP</button>
@@ -34,7 +38,6 @@
        </nav>
 
     </header>
-
     <main id ="map"></main>
     <div class="description-of-item">
         <div class="name-of-item"></div>
@@ -44,15 +47,18 @@
         <div class="expiration-date-of-item"></div>
         <div class="pickup-date-of-item"></div>
         <div class="pickup-time-of-item"></div>
-        <div class="reservation">
-            <a href="/login" class="warning-link hidden">
-                <p>You need to be logged in to Reserve Item</p> 
-            </a>
-            <button class="reserve-btn" >Reserve Trashure</button>
-            <button class="unreserve-btn hidden">Reserve Trashure</button>
-        </div>
+       <% if (user) { %>
+        <form action="/reservation" method="post" class="reservation">
+            <input type="hidden" name="item_id" class="trashure-item-id" value="">
+            <button class="reserve-btn hidden" >Reserve Trashure</button>
+            
+        </form> 
+        <form action="/reservation" method="delete">
+            <button class="unreserve-btn hidden">Unreserve Trashure</button>
+        </form>   
+        <% } %>
     </div>
-    
+
 
     <script src="/trashure-client.js"></script>
 </body>
