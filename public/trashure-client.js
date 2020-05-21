@@ -112,7 +112,9 @@ function getMap() {
         axios.get(url).then(res => {
 
             res.data.forEach(function(data) {
+                console.log(data)
                 if (data.status !== 'expired'){
+                    console.log(data.status)
                     var location = { latitude: data.lat, longitude: data.long}
                     pin = new Microsoft.Maps.Pushpin(location, {
                         title: data.name,
