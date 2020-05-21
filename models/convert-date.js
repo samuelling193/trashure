@@ -1,4 +1,5 @@
-function convertDate(date) {
+ module.exports = {
+     convertDate: function convertDate(date) {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
@@ -10,4 +11,9 @@ function convertDate(date) {
         day = '0' + day;
 
     return [year, month, day].join('-');
-}
+    }
+}  
+
+// module.exports = { 
+//     convertDate: convertDate
+// }
