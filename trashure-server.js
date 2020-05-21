@@ -23,12 +23,12 @@ app.use(express.static('public'))
 
 passport.use(new Strategy(
     function(username, password, cb) {
-        db.query('select * from users where username = $1;', [username]).then(function(dbRes) {
-            console.log(dbres)
-            if (err) { return cb(err); }
-            if (!user) { return cb(null, false); }
-            if (dbres.encrypted_password != password) { return cb(null, false); }
-        })
+        db.query('select * from users where username = $1;', [username]).then(function(dbRes){
+            let hash = dbRes.rows[0].encrypted_password
+            if(bcrypt.compareSync(password, hash)){
+                cb(null, dbRes.rows[0])
+        }
+    })
 }));
 
 passport.serializeUser(function(user, cb) {
@@ -79,10 +79,17 @@ app.post('/signup', (req, res)=>{
 
 })
 
-app.get('/myitems/:owner_id', (req,res)=>{
-    db.query('select * from trashure_items where owner_id = $1;', [req.params.owner_id], (err, dbRes)=>{
-        // res.json(dbRes.rows)
-        res.render('view-my-items', {items: dbRes.rows})
+app.get('/logout',
+  function(req, res){
+    req.logout();
+    res.redirect('/');
+});
+
+app.get('/myitems', (req,res)=>{
+    db.query('select * from trashure_items where owner_id = $1;', [req.user.id], (err, items)=>{
+        db.query('select * from reservations where requester_id = $1;', [req.user.id], (err, reservations)=>{
+            res.render('view-my-items', {items: items.rows, reservations: reservations.rows})
+        })
     })
 })
 
@@ -161,6 +168,10 @@ app.get('/api/users/:id', (req, res) => {
         (err, dbRes) => {
             res.json(dbRes.rows)
     })
+})
+
+app.get('/api/current_user', (req, res)=>{
+    res.json(req.user)
 })
 
 app.listen(port, () => {
