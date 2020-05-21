@@ -91,7 +91,7 @@ app.get('/myitems',ensureLoggedIn('/login'), (req,res) => {
         db.query('select * from reservations join trashure_items on (reservations.item_id = trashure_items.id) where requester_id = $1;', [req.user.id], (err, reservations)=>{
             res.render('view-my-items', {items: items.rows, reservations: reservations.rows})
         })
-    }
+    })
 })
 
 app.get('/item',ensureLoggedIn('/login'), (req, res) => {
