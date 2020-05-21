@@ -9,8 +9,8 @@ var map, searchManager, address, infobox
 var item_location = {}
 
 const reverseGeocode = function(e) {
-    itemAddress.value = '';
     // infobox.setMap(null)
+    itemAddress.value = '';
     if (map.entities != []) {
         map.entities.clear();        
     }
@@ -39,6 +39,7 @@ const reverseGeocode = function(e) {
                     longitude: res.location.longitude
                 });
                 infobox.setMap(map);
+                console.log(infobox)
                 setTimeout(function () { infobox.setMap(null) }, 2000);
             },
             errorCallback: function (e) {
