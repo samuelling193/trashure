@@ -118,8 +118,8 @@ app.post('/item', (req,res) => {
            pickup_end_time: req.body.pickup_end_time
 
         })
-        // res.redirect('/')
     })
+    res.redirect('/myitems')
 })
 
 app.get('/item/:id', (req,res) => {
