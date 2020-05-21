@@ -11,6 +11,7 @@ const saltRounds = 10;
 const session = require('express-session')
 const passport = require('passport')
 const Strategy = require('passport-local').Strategy;
+const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn
 
 const bodyParser = require('body-parser')
 
@@ -75,7 +76,7 @@ app.post('/signup', (req, res)=>{
             })
             
         })
-        res.redirect('/')
+        res.redirect('/login')
 
 })
 
@@ -85,13 +86,14 @@ app.get('/logout',
     res.redirect('/');
 });
 
-app.get('/myitems', (req,res)=>{
+app.get('/myitems',ensureLoggedIn('/login'), (req,res)=>{
     db.query('select * from trashure_items where owner_id = $1;', [req.user.id], (err, items)=>{
-        db.query('select * from reservations where requester_id = $1;', [req.user.id], (err, reservations)=>{
+        db.query('select * from reservations join trashure_items on (reservations.item_id = trashure_items.id) where requester_id = $1;', [req.user.id], (err, reservations)=>{
             res.render('view-my-items', {items: items.rows, reservations: reservations.rows})
         })
     })
 })
+
 
 app.get('/item', (req, res) => {
     res.render('new-item')

@@ -24,11 +24,22 @@
                 <button>update</button>
             </div>
         </div>
-            <% }); %>
+    <% }); %>
     
     <h2>Reserved</h2>
 
-   
+    <% reservations.forEach(function(res){ %>
+        <div class = "my-items-box">
+            <img src="<%= res.image_url%>" alt="">
+            <div class = "item-box-text">
+                <p>Name: <%= res.name %></p>
+                <p>Address: <%= res.Address %></p>
+                <p>Pickup date: <%= res.pickup_date %></p>
+                <p>Pickup time: <%= res.pickup_time %></p>
+            </div>
+        </div>
+    <% }) %>
+       
 </body>
 </html>
 
