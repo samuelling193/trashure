@@ -22,8 +22,11 @@ app.use(express.static('public'))
 
 passport.use(new Strategy(
     function(username, password, cb) {
-        db.query('select * from users where username = $1;', [username]).then(function(dbRes){
-            cb(null, dbRes.rows[0])
+        db.query('select * from users where username = $1;', [username]).then(function(dbRes) {
+            console.log(dbres)
+            if (err) { return cb(err); }
+            if (!user) { return cb(null, false); }
+            if (dbres.encrypted_password != password) { return cb(null, false); }
         })
 }));
 
