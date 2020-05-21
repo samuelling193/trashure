@@ -1,7 +1,7 @@
 .create-form-div, .update-form-div {
     background-color: rgb(241, 237, 237);
     box-shadow:         1px 0px 40px 0px rgba(78, 108, 246, 0.99);
-    min-width: 600px;
+    min-width: 700px;
 }
 
 .create-form-div input, .update-form-div input{
