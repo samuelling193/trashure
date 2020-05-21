@@ -106,6 +106,8 @@ const handlePinClick = function (e) {
             reserveBtn.classList.toggle('hidden')
             document.querySelector('.trashure-item-id').value = data.id
         }
+        document.querySelector(".pickup-time-of-item").textContent = `Pickup Time (24hr format): ${data.pickup_start_time.slice(0,5)} - ${data.pickup_end_time.slice(0,5)}`            
+        
         })
     })
 }

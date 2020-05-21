@@ -4,7 +4,13 @@
 
 #map {
     height: 500px;
+<<<<<<< HEAD
     border: 5px solid #87A8A0;
+=======
+    margin: 30px;
+    border: 2px solid white;
+    border-radius: 10px;
+>>>>>>> styling still in progress
 }
 .item-map {
     height: 500px;
@@ -210,4 +216,15 @@ button {
 .reserved {
     background-color: aqua;
 }
+<<<<<<< HEAD
 /* login signup logout button */
+=======
+.description-of-item {
+    margin: 30px;
+    border: 1px solid white;
+    border-radius: 8px;
+}
+.description-of-item div {
+    margin: 10px;
+}
+>>>>>>> styling still in progress
