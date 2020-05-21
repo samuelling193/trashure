@@ -1,5 +1,7 @@
 console.log("trashure client js successfully connected")
 
+var map, searchManager, address 
+
 //gets user location from browser
 
 function getLocation(cb) {
@@ -36,7 +38,11 @@ const handlePinClick = function (e) {
         
         document.querySelector(".name-of-item").textContent = `Name: ${data.name}`
         document.querySelector(".quantity-of-item").textContent = 'Quantity: 1'
-        document.querySelector(".location-of-item").textContent = 'Address: Need to get Address from lat % long'
+        // document.querySelector(".location-of-item").textContent = 'Address: Need to get Address from lat % long'
+        
+        let fakevent = { location: {latitude: Number(data.lat), longitude: Number(data.long)}}
+        
+        reverseGeocode(fakevent)
         
         const url = `http://localhost:8080/api/users/${data.owner_id}`
         axios.get(url).then(res => {
@@ -53,14 +59,13 @@ function getMap() {
 
     getLocation(function (userLocation){
 
-        var map = new Microsoft.Maps.Map('#map', {
+        map = new Microsoft.Maps.Map('#map', {
                                                 // user location 
             center: new Microsoft.Maps.Location(userLocation.latitude, userLocation.longitude),
             zoom: 10
         });
 
         var center = map.getCenter()
-        console.log(center)
 
         const url = 'http://localhost:8080/api/trashure_items'
 
@@ -79,34 +84,35 @@ function getMap() {
         })
         
 
-        // Create custom Pushpin
-        // var pin  = new Microsoft.Maps.Pushpin(center, {
-        //     title: 'Melbourne',
-        //     subTitle: 'City Center',
-        //     text: '1'
-        // })
-
-        // Fetches information to be displayed
-        const getInformationAboutItem = (e) => { 
-            // Needs the right information
-            return(e.target._options.itemId) 
-        }
-
-        axios.get(url).then(res => {
-            res.data.forEach(function(data) {
-                var location = { 
-                    latitude: data.lat, 
-                    longitude: data.long
-                }
-                pin = new Microsoft.Maps.Pushpin(location, {
-                    title: data.name,
-                    text: `${data.id}`
-                })
-                map.entities.push(pin)
-                
-                // Handles the click event of a pin, note changes textContent of Div to display it
-                Microsoft.Maps.Events.addHandler(pin, 'click', handlePinClick)
-            })
-        })
     })
+    
+
+    
+}
+const reverseGeocode = function(e) {
+    //If search manager is not defined, load the search module.
+    if (!searchManager) {
+            //Create an instance of the search manager and call the reverseGeocode function again.
+        Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
+            searchManager = new Microsoft.Maps.Search.SearchManager(map);
+            reverseGeocode(e);
+        });
+    } else {
+        var searchRequest = {
+                        // loca arguement to be passed in
+            location: e.location,
+            callback: function (r) {
+                //Tell the user the name of the result.
+                // debugger
+                document.querySelector(".location-of-item").textContent = `Address: ${r.name}`;
+            },
+            errorCallback: function (e) {
+                //If there is an error, alert the user about it.
+                alert("Unable to reverse geocode location.");
+            }
+        };
+        //Make the reverse geocode request.
+        searchManager.reverseGeocode(searchRequest);
+        
+    }
 }
