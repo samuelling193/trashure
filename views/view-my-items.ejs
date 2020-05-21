@@ -14,8 +14,12 @@
     <% items.forEach(function(item){ %>
         <div class = "my-items-box">
             <img src="<%= item.image_url%>" alt="">
-            <div class = "item-box-text">
-                <p>Name: <%= item.name %></p>
+            <% if (item.status = "reserved") { %>
+                <div class = "item-box-text">
+            <% } else { %>
+                <div class = "item-box-text reserved">
+            <% } %>
+                <p >Name: <%= item.name %></p>
                 <p>Item type: <%= item.item_type %></p>
                 <p>Pickup date: <%= item.pickup_date %></p>
                 <p>Item status: <%= item.status %></p>
