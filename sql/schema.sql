@@ -24,6 +24,7 @@ create table trashure_items (
     lat decimal,
     long decimal,
     address text,
+    formatted_address text,
     expiration_date date not null default current_date,
     status text default 'available',
     image_url text,
