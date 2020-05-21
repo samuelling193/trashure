@@ -46,6 +46,10 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: false, save
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.get('/', (req, res) => {
+    res.render('index', { user: req.user })
+})
+
 app.get('/login', (req, res)=>{
     res.render('log-in')
 })
@@ -103,9 +107,9 @@ app.post('/item', (req,res) => {
     const sql = 'INSERT INTO trashure_items (owner_id, name,item_type, lat, long, address, quantity, image_url, pickup_date, expiration_date,pickup_start_time, pickup_end_time) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12);'
 
     // need to get owner_id from db, at the moment it's hard coded
-    db.query(sql, [1, req.body.name, req.body.item_type, req.body.latitude, req.body.longitude, req.body.address, req.body.quantity, req.body.image_url, req.body.pickup_date,req.body.pickup_date, req.body.pickup_start_time,req.body.pickup_end_time], (err,dbRes) => {
+    db.query(sql, [req.user.id, req.body.name, req.body.item_type, req.body.latitude, req.body.longitude, req.body.address, req.body.quantity, req.body.image_url, req.body.pickup_date,req.body.pickup_date, req.body.pickup_start_time,req.body.pickup_end_time], (err,dbRes) => {
         res.json({
-           owner_id: 1, 
+           owner_id: req.user.id, 
            name: req.body.name,
            item_type: req.body.item_type,
            lat: req.body.latitude,
@@ -136,7 +140,7 @@ app.put('/item/:id', (req, res) => {
 
     db.query(sql, [req.body.name, req.body.item_type, req.body.latitude, req.body.longitude, req.body.address, req.body.quantity, req.body.image_url, req.body.pickup_date, req.body.pickup_date, req.body.pickup_start_time,req.body.pickup_end_time, req.params.id], (err,dbRes) => {
         res.json({
-        //    owner_id: 1, 
+           owner_id: req.user.id, 
            name: req.body.name,
            item_type: req.body.item_type,
            lat: req.body.latitude,
