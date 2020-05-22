@@ -1,12 +1,13 @@
 const pg = require('pg');
 
 let pool;
+
 if (process.env.PRODUCTION) {
-  pool = new Pool({
+  pool = new pg.Pool({
     connectionString: process.env.DATABASE_URL,
   })
 } else {
-  pool = new Pool({
+  pool = new pg.Pool({
     database: 'trashure',
     user: 'debbiepaterson',
     password: 'hello'
