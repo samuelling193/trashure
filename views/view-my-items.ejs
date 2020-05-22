@@ -9,8 +9,12 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-
-    <h2>View my items</h2>
+    <nav class='page-nav'> 
+        <div class="nav-item"><a href="/"><img class='nav-icon' src="images/map.png"><p>Home</p></a></div>
+        <div class="nav-item"><a href="/myitems"><img class='nav-icon' src="images/treasure-chest.png"><p>My Trashure</p></a></div>
+        <div class="nav-item"><a href="/item"><img class='nav-icon' src="images/new.png"><p>New Trashure</p></a></div>
+    </nav>
+    <h2 class="view-items">View my items</h2>
 
     <% items.forEach(function(item){ %>
         <div class = "my-items-box">
@@ -34,7 +38,7 @@
         </div>
     <% }); %>
     
-    <h2>Reserved</h2>
+    <h2 class="view-items">Reserved</h2>
 
     <% reservations.forEach(function(res){ %>
         <div class = "my-items-box">
