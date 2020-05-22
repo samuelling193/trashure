@@ -24,9 +24,12 @@
                 <p>Item type: <%= item.item_type %></p>
                 <p>Pickup date: <%= item.pickup_date %></p>
                 <p>Item status: <%= item.status %></p>
+                <p>Item address: <%= item.address %></p>
             </div>
             <div>
-                <button>update</button>
+                <form action="/item/<%= item.id %>">
+                    <button>update</button>
+                </form>
             </div>
         </div>
     <% }); %>
