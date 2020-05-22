@@ -46,19 +46,11 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: false, save
 app.use(passport.initialize());
 app.use(passport.session());
 
-<<<<<<< HEAD
-
-=======
->>>>>>> update button works for myitems page
 app.get('/', (req, res) => {
     res.render('index', { user: req.user })
 })
 
-<<<<<<< HEAD
 app.get('/login', (req, res) => {
-=======
-app.get('/login', (req, res)=>{
->>>>>>> update button works for myitems page
     res.render('log-in')
 })
 
@@ -73,11 +65,7 @@ app.get('/signup', (req, res) => {
     res.render('sign-up')
 })
 
-<<<<<<< HEAD
 app.post('/signup', (req, res) => {
-=======
-app.post('/signup', (req, res, next)=>{
->>>>>>> update button works for myitems page
 
     const hash = bcrypt.hashSync(req.body.password, 10);
 
@@ -107,13 +95,8 @@ app.get('/myitems',ensureLoggedIn('/login'), (req,res) => {
         db.query('select * from reservations join trashure_items on (reservations.item_id = trashure_items.id) where requester_id = $1;', [req.user.id], (err, reservations) => {
             res.render('view-my-items', {items: items.rows, reservations: reservations.rows})
         })
-<<<<<<< HEAD
     })
 })
-=======
-    }
-)})
->>>>>>> update button works for myitems page
 
 app.get('/item',ensureLoggedIn('/login'), (req, res) => {
         res.render('new-item')
