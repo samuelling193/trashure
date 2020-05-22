@@ -108,23 +108,8 @@ app.post('/item', (req,res) => {
 
     // need to get owner_id from db, at the moment it's hard coded
     db.query(sql, [req.user.id, req.body.name, req.body.item_type, req.body.latitude, req.body.longitude, req.body.address, req.body.quantity, req.body.image_url, req.body.pickup_date,req.body.pickup_date, req.body.pickup_start_time,req.body.pickup_end_time], (err,dbRes) => {
-        res.json({
-           owner_id: req.user.id, 
-           name: req.body.name,
-           item_type: req.body.item_type,
-           lat: req.body.latitude,
-           long: req.body.longitude,
-           address: req.body.address,
-           quantity: req.body.quantity,
-           image_url: req.body.image_url,
-           pickup_date: req.body.pickup_date,
-           expiry_date: req.body.pickup_date,
-           pickup_start_time: req.body.pickup_start_time,
-           pickup_end_time: req.body.pickup_end_time
-
-        })
+        res.redirect('/myitems')
     })
-    res.render('index')
 })
 
 app.get('/item/:id', (req,res) => {
@@ -139,22 +124,9 @@ app.put('/item/:id', (req, res) => {
     const sql = 'UPDATE trashure_items SET name = $1,item_type = $2, lat = $3, long = $4, address = $5, quantity = $6, image_url = $7, pickup_date = $8,expiration_date = $9, pickup_start_time = $10, pickup_end_time = $11 WHERE id = $12;'
 
     db.query(sql, [req.body.name, req.body.item_type, req.body.latitude, req.body.longitude, req.body.address, req.body.quantity, req.body.image_url, req.body.pickup_date, req.body.pickup_date, req.body.pickup_start_time,req.body.pickup_end_time, req.params.id], (err,dbRes) => {
-        res.json({
-           owner_id: req.user.id, 
-           name: req.body.name,
-           item_type: req.body.item_type,
-           lat: req.body.latitude,
-           long: req.body.longitude,
-           address: req.body.address,
-           quantity: req.body.quantity,
-           image_url: req.body.image_url,
-           pickup_date: req.body.pickup_date,
-           expiry_date: req.body.pickup_date,
-           pickup_start_time: req.body.pickup_start_time,
-           pickup_end_time: req.body.pickup_end_time
-        })
+        res.redirect('/myitems')
+
     })
-    res.render('index')
 })
 
 app.get('/api/trashure_items', (req, res) => {
