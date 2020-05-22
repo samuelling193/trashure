@@ -46,11 +46,12 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: false, save
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 app.get('/', (req, res) => {
     res.render('index', { user: req.user })
 })
 
-app.get('/login', (req, res) => {
+app.get('/login', (req, res)=>{
     res.render('log-in')
 })
 
