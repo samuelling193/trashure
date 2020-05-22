@@ -141,7 +141,7 @@ app.post('/item', (req,res) => {
 
         })
     })
-    res.redirect('/myitems')
+    res.render('index')
 })
 
 app.get('/item/:id', (req,res) => {
@@ -171,6 +171,7 @@ app.put('/item/:id', (req, res) => {
            pickup_end_time: req.body.pickup_end_time
         })
     })
+    res.render('index')
 })
 
 app.get('/api/trashure_items', (req, res) => {
