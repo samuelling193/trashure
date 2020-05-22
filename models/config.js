@@ -8,8 +8,8 @@ if (process.env.PRODUCTION) {
 } else {
   pool = new Pool({
     database: 'trashure',
-    user: 'debbiepaterson'
-    password: 'hello',
+    user: 'debbiepaterson',
+    password: 'hello'
   })
 }
 
