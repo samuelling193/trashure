@@ -46,12 +46,19 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: false, save
 app.use(passport.initialize());
 app.use(passport.session());
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> update button works for myitems page
 app.get('/', (req, res) => {
     res.render('index', { user: req.user })
 })
 
+<<<<<<< HEAD
 app.get('/login', (req, res) => {
+=======
+app.get('/login', (req, res)=>{
+>>>>>>> update button works for myitems page
     res.render('log-in')
 })
 
@@ -66,23 +73,19 @@ app.get('/signup', (req, res) => {
     res.render('sign-up')
 })
 
+<<<<<<< HEAD
 app.post('/signup', (req, res) => {
+=======
+app.post('/signup', (req, res, next)=>{
+>>>>>>> update button works for myitems page
 
     const hash = bcrypt.hashSync(req.body.password, 10);
 
     db.query(
         'insert into users (username, name, email, encrypted_password, avatar_url) values ($1, $2, $3, $4, $5)', [req.body.username, req.body.name, req.body.email, hash, req.body.avatar_url], (err, dbRes) => {
 
-            res.json({
-                username: req.body.username, 
-                name: req.body.name, 
-                email: req.body.email,
-                avatar_url: req.body.avatar_url
-            })
-            
+            res.redirect('/login')
         })
-        res.redirect('/login')
-
 })
 
 app.get('/logout', (req, res) => {
@@ -104,8 +107,13 @@ app.get('/myitems',ensureLoggedIn('/login'), (req,res) => {
         db.query('select * from reservations join trashure_items on (reservations.item_id = trashure_items.id) where requester_id = $1;', [req.user.id], (err, reservations) => {
             res.render('view-my-items', {items: items.rows, reservations: reservations.rows})
         })
+<<<<<<< HEAD
     })
 })
+=======
+    }
+)})
+>>>>>>> update button works for myitems page
 
 app.get('/item',ensureLoggedIn('/login'), (req, res) => {
         res.render('new-item')
@@ -139,7 +147,7 @@ app.post('/item', (req,res) => {
 app.get('/item/:id', (req,res) => {
 
     db.query('SELECT * FROM trashure_items WHERE id = $1;', [req.params.id], (err, dbRes) => {
-        res.render('edit-item', { item: dbRes.rows })
+        res.render('edit-item', { item: dbRes.rows } )
     })
 })
 
