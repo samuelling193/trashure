@@ -19,7 +19,12 @@
     <%if (month.length < 2) %> 
         <% { month = '0' + month }%>
     <% [year, month, day].join('-')%>
-
+    <nav class='page-nav'> 
+        <div class="nav-item"><a href="/"><img class='nav-icon' src="images/map.png"><p>Home</p></a></div>
+        <div class="nav-item"><a href="/myitems"><img class='nav-icon' src="images/treasure-chest.png"><p>My Trashure</p></a></div>
+        <div class="nav-item"><a href="/item"><img class='nav-icon' src="images/new.png"><p>New Trashure</p></a></div>
+    </nav>
+    
     <h1 class="form-h1">Create New Trashure</h1>
     <div class="create-form-div">
         <form class="create-form" action="/item" method="post">
@@ -65,6 +70,7 @@
             <div>
                 <label for="">Pickup Time, to: </label>
                 <input type="time" class="pickup_end_time" name="pickup_end_time">
+                <input type="hidden" class="status-of-item" name="status" value ="available">
             </div>
             <button class="create-btn">Publish the Trashure</button> 
         </form>
