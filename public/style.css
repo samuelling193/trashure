@@ -48,6 +48,10 @@ nav {
     text-align: center;
 }
 
+.page-nav {
+    margin: 40px auto;
+}
+
 a {
     text-decoration: none;
     color: black;

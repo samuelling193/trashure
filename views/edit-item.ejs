@@ -12,6 +12,11 @@
     async defer></script>
 </head>
 <body>
+    <nav class='page-nav'> 
+        <div class="nav-item"><a href="/"><img class='nav-icon' src="/images/map.png"><p>Home</p></a></div>
+        <div class="nav-item"><a href="/myitems"><img class='nav-icon' src="/images/treasure-chest.png"><p>My Trashure</p></a></div>
+        <div class="nav-item"><a href="/item"><img class='nav-icon' src="/images/new.png"><p>New Trashure</p></a></div>
+    </nav>
 
     <!-- converting Date to display safed in DB -->
     <% today = new Date() %>
@@ -26,7 +31,7 @@
     <% } %>
     <% savedDateInDB = convertDate(item[0].pickup_date)%>
     <% currentDate = convertDate()%>
-   
+
     <h1 class="form-h1">Update Item</h1>
     <div class="update-form-div">
         <form class="update-form" action="/item/<%=item[0].id%>?_method=PUT"  method="POST">
