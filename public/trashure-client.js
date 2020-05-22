@@ -3,7 +3,22 @@
 const reserveBtn = document.querySelector('.reserve-btn')
 const unreserveBtn = document.querySelector('.unreserve-btn')
 
-// convert time Function
+// //  display time format 
+// var startTime = data.pickup_start_time.slice(0,5)
+// if (data.pickup_start_time.slice(0,2) < 12) {
+//     startTime += 'am'
+// }  else { 
+//     startTime += 'pm'
+// } 
+
+// var endTime = data.pickup_end_time.slice(0,5)
+// if (data.pickup_end_time.slice(0,2) < 12) {
+//     endTime += 'am'
+// }  else { 
+//     endTime = (data.pickup_end_time.slice(0,2) - 12) + 'pm'
+// } 
+
+// convert Date Function
 function convertDate(date) {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
@@ -98,15 +113,25 @@ const handlePinClick = function (e) {
             document.querySelector(".owner-of-item").textContent = `Owner: ${res.data[0].name}`
         })
         
+         //display time format 
+        var startTime = data.pickup_start_time.slice(0,5)
+        if (data.pickup_start_time.slice(0,2) < 12) {
+            startTime += 'am'
+        }  else { 
+            startTime += 'pm'
+        } 
 
+        var endTime = data.pickup_end_time.slice(0,5)
+        if (data.pickup_end_time.slice(0,2) < 12) {
+            endTime += 'am'
+        }  else if (data.pickup_end_time.slice(0,2) >13) { 
+            endTime = (data.pickup_end_time.slice(0,2) - 12) + 'pm'
+        } else {
+            endTime += 'pm'
+        }
         document.querySelector(".expiration-date-of-item").textContent = `Expiration Date: ${convertDate(data.expiration_date)}`
         document.querySelector(".pickup-date-of-item").textContent = `Pickup Date: ${convertDate(data.pickup_date)}`
-        document.querySelector(".pickup-time-of-item").textContent = `Pickup Time: ${data.pickup_start_time} - ${data.pickup_end_time}`            
-        if (reserveBtn) {
-            reserveBtn.classList.toggle('hidden')
-            document.querySelector('.trashure-item-id').value = data.id
-        }
-        document.querySelector(".pickup-time-of-item").textContent = `Pickup Time (24hr format): ${data.pickup_start_time.slice(0,5)} - ${data.pickup_end_time.slice(0,5)}`            
+        document.querySelector(".pickup-time-of-item").textContent = `Pickup Time: ${startTime} - ${endTime}`            
         
         })
     })
