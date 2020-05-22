@@ -8,6 +8,7 @@
     <script type='text/javascript'
             src='http://www.bing.com/api/maps/mapcontrol?callback=getMap&key=AuewOzxuyMxFiwOpCiEiYyNsck-yIwg3nBqGlLukoPc6gZm-v9Eiyw3eBGpPPTDw' 
             async defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Livvic:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style2.css">
 </head>
@@ -18,7 +19,7 @@
                 <h1>Trashure</h1>
             </div>
             <% if (user) { %>
-            <h1> <%= user.name %> </h1>
+            <h1 class="user-name">Logged In: <%= user.name %> </h1>
             <% } %>
 
             <div>
@@ -31,32 +32,37 @@
             </div>
         </section>
        <nav class='main-nav'> 
-         <div><a href="/"><img class='nav-icon' src="images/map.png"><li>Home</p></a></div>
-        <div><a href="/myitems"><img class='nav-icon' src="images/treasure-chest.png"><li>My Trashure</p></a></div>
-        <div><a href="/item"><img class='nav-icon' src="images/new.png"><li>New Trashure</p></a></div>
+         <div class="nav-item"><a href="/"><img class='nav-icon' src="images/map.png"><p>Home</p></a></div>
+        <div class="nav-item"><a href="/myitems"><img class='nav-icon' src="images/treasure-chest.png"><p>My Trashure</p></a></div>
+        <div class="nav-item"><a href="/item"><img class='nav-icon' src="images/new.png"><p>New Trashure</p></a></div>
 
        </nav>
 
     </header>
     <main id ="map"></main>
-    <div class="description-of-item">
-        <div class="name-of-item"></div>
-        <div class="quantity-of-item"></div>
-        <div class="location-of-item"></div>
-        <div class="owner-of-item"></div>
-        <div class="expiration-date-of-item"></div>
-        <div class="pickup-date-of-item"></div>
-        <div class="pickup-time-of-item"></div>
-       <% if (user) { %>
-        <form action="/reservation" method="post" class="reservation">
-            <input type="hidden" name="item_id" class="trashure-item-id" value="">
-            <button class="reserve-btn hidden" >Reserve Trashure</button>
-            
-        </form> 
-        <form action="/reservation" method="delete">
-            <button class="unreserve-btn hidden">Unreserve Trashure</button>
-        </form>   
-        <% } %>
+    <div class="description-of-item hidden">
+        <section class="item-image">
+            <img class="image-of-item">
+        </section>
+        <section class="item-text">
+            <div class="name-of-item"></div>
+            <div class="quantity-of-item"></div>
+            <div class="location-of-item"></div>
+            <div class="owner-of-item"></div>
+            <div class="expiration-date-of-item"></div>
+            <div class="pickup-date-of-item"></div>
+            <div class="pickup-time-of-item"></div>
+        <% if (user) { %>
+            <form action="/reservation" method="post" class="reservation">
+                <input type="hidden" name="item_id" class="trashure-item-id" value="">
+                <button class="reserve-btn hidden" >Reserve Trashure</button>
+                
+            </form> 
+            <form action="/reservation" method="delete">
+                <button class="unreserve-btn hidden">Unreserve Trashure</button>
+            </form>   
+            <% } %>
+        </section>
     </div>
 
 

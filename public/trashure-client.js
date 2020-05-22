@@ -80,7 +80,11 @@ const handlePinClick = function (e) {
     const url = `http://localhost:8080/api/trashure_items/${e.target._options.text}`
     axios.get(url).then(res => {
         res.data.forEach(function(data) {
-        
+
+        document.querySelector(".description-of-item").classList.remove('hidden')
+
+        document.querySelector(".image-of-item").src = data.image_url
+       
         document.querySelector(".name-of-item").textContent = `Name: ${data.name}`
         document.querySelector(".quantity-of-item").textContent = 'Quantity: 1'
         // document.querySelector(".location-of-item").textContent = 'Address: Need to get Address from lat % long'
