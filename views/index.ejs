@@ -56,16 +56,15 @@
             <div class="pickup-date-of-item"></div>
             <div class="pickup-time-of-item"></div>
         <% if (user) { %>
-            <form action="/reservation" method="post" class="reservation">
-                <input type="hidden" name="item_id" class="trashure-item-id" value="">
-                <button class="reserve-btn hidden" >Reserve Trashure</button>
-                
-            </form> 
-            <form action="/reservation" method="delete">
-                <button class="unreserve-btn hidden">Unreserve Trashure</button>
-            </form>   
-            <% } %>
-        </section>
+        <form action="/reservation" method="post" class="reservation">
+            <input type="hidden" name="item_id" class="post-trashure-item-id" value="">
+            <button class="reserve-btn hidden" >Reserve Trashure</button>
+        </form> 
+        <form action="/reservation/delete" method="post">
+            <input type="hidden" name="item_id" class="delete-trashure-item-id" value="">
+            <button class="unreserve-btn hidden">Unreserve Trashure</button>
+        </form>   
+        <% } %>
     </div>
 
 

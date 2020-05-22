@@ -81,17 +81,23 @@ app.get('/logout', (req, res) => {
     res.redirect('/')
 });
 
+app.post('/reservation/delete', (req, res) => {
+    db.query('delete from reservations where item_id = $1;', [req.body.item_id])
+    db.query('update trashure_items SET status = $1 where id = $2;', ['available', req.body.item_id])
+    res.redirect('/myitems')
+})
+
 app.post('/reservation', (req, res) => {
-    db.query("UPDATE trashure_items SET status = $1 where id = $2", ['reserved', req.body.item_id])
-    db.query('select * from trashure_items where id = 1$', [req.body.item_id], (err, items) => {
-        db.query('INSERT INTO reservations (owner_id, requester_id, item_id, request_date, request_time) VALUES ($1, $2, $3, $4, $5);', 
-        [items.rows[0].owner_id, req.user.id, req.body.item_id, items.rows[0].request_date, items.rows[0].request_time])
+    db.query('select * from trashure_items where id = $1', [req.body.item_id], (err, items) => {
+        db.query('insert into reservations (owner_id, requester_id, item_id, request_date, request_time) VALUES ($1, $2, $3, $4, $5);', 
+        [items.rows[0].owner_id, req.user.id, req.body.item_id, items.rows[0].pickup_date, items.rows[0].pickup_start_time])
     })
+    db.query('update trashure_items SET status = $1 where id = $2', ['reserved', req.body.item_id])
     res.redirect('/myitems')
 })
 
 app.get('/myitems',ensureLoggedIn('/login'), (req,res) => {
-    db.query('select * from trashure_items where owner_id = $1;', [req.user.id], (err, items)=>{
+    db.query('select * from trashure_items where owner_id = $1;', [req.user.id], (err, items) => {
         db.query('select * from reservations join trashure_items on (reservations.item_id = trashure_items.id) where requester_id = $1;', [req.user.id], (err, reservations) => {
             res.render('view-my-items', {items: items.rows, reservations: reservations.rows})
         })
@@ -104,7 +110,7 @@ app.get('/item',ensureLoggedIn('/login'), (req, res) => {
 
 app.post('/item', (req,res) => {
      
-    const sql = 'INSERT INTO trashure_items (owner_id, name,item_type, lat, long, address, quantity, image_url, pickup_date, expiration_date,pickup_start_time, pickup_end_time) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12);'
+    const sql = 'insert into trashure_items (owner_id, name,item_type, lat, long, address, quantity, image_url, pickup_date, expiration_date,pickup_start_time, pickup_end_time) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12);'
 
     // need to get owner_id from db, at the moment it's hard coded
     db.query(sql, [req.user.id, req.body.name, req.body.item_type, req.body.latitude, req.body.longitude, req.body.address, req.body.quantity, req.body.image_url, req.body.pickup_date,req.body.pickup_date, req.body.pickup_start_time,req.body.pickup_end_time], (err,dbRes) => {
@@ -129,14 +135,14 @@ app.post('/item', (req,res) => {
 
 app.get('/item/:id', (req,res) => {
 
-    db.query('SELECT * FROM trashure_items WHERE id = $1;', [req.params.id], (err, dbRes) => {
-        res.render('edit-item', { item: dbRes.rows } )
+    db.query('select * from trashure_items where id = $1;', [req.params.id], (err, dbRes) => {
+        res.render('edit-item', { item: dbRes.rows })
     })
 })
 
 app.put('/item/:id', (req, res) => {
 
-    const sql = 'UPDATE trashure_items SET name = $1,item_type = $2, lat = $3, long = $4, address = $5, quantity = $6, image_url = $7, pickup_date = $8,expiration_date = $9, pickup_start_time = $10, pickup_end_time = $11 WHERE id = $12;'
+    const sql = 'update trashure_items set name = $1,item_type = $2, lat = $3, long = $4, address = $5, quantity = $6, image_url = $7, pickup_date = $8,expiration_date = $9, pickup_start_time = $10, pickup_end_time = $11 where id = $12;'
 
     db.query(sql, [req.body.name, req.body.item_type, req.body.latitude, req.body.longitude, req.body.address, req.body.quantity, req.body.image_url, req.body.pickup_date, req.body.pickup_date, req.body.pickup_start_time,req.body.pickup_end_time, req.params.id], (err,dbRes) => {
         res.json({
@@ -178,10 +184,19 @@ app.get('/api/users/:id', (req, res) => {
     })
 })
 
+app.get('/api/reservations/:id', (req, res) => {
+    db.query(
+        'select * from reservations where item_id = $1;', 
+        [req.params.id], 
+        (err, dbRes) => {
+            res.json(dbRes.rows)
+    })
+})
+
 app.get('/api/current_user', (req, res) => {
     res.json(req.user)
 })
 
 app.listen(port, () => {
-    console.log(`listening on ${port}`)
+    (`listening on ${port}`)
 })

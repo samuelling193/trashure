@@ -45,9 +45,12 @@
                 <p>Pickup date: <%= res.pickup_date %></p>
                 <p>Pickup time: <%= res.pickup_time %></p>
             </div>
+            <form action="/reservation/delete" method="post">
+                <input type="hidden" name="item_id" class="delete-trashure-item-id" value="<%= res.item_id %>">
+                <button class="unreserve-btn hidden">Unreserve Trashure</button>
+            </form> 
         </div>
     <% }) %>
-       
 </body>
 </html>
 

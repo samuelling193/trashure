@@ -66,7 +66,6 @@ const reverseGeocode = function(e) {
 
 function getLocation(cb) {
   if (navigator.geolocation) {
-      //console.log(userLocation)
       navigator.geolocation.getCurrentPosition((position) => showPosition(position, cb));
 
 
@@ -87,7 +86,6 @@ function showPosition(position, cb) {
     }
 
     cb(userLocation)
-    //console.log(userLocation) 
 }
 
 // Fetches information to be displayed
@@ -132,7 +130,19 @@ const handlePinClick = function (e) {
         document.querySelector(".expiration-date-of-item").textContent = `Expiration Date: ${convertDate(data.expiration_date)}`
         document.querySelector(".pickup-date-of-item").textContent = `Pickup Date: ${convertDate(data.pickup_date)}`
         document.querySelector(".pickup-time-of-item").textContent = `Pickup Time: ${startTime} - ${endTime}`            
-        
+    
+            if (reserveBtn) {
+                let url = `/api/reservations/${data.id}`
+                axios.get(url).then(reserve => {
+                    if (data.status === 'available') {
+                        reserveBtn.classList.remove('hidden')
+                        document.querySelector('.post-trashure-item-id').value = data.id
+                    } else if (reserve.data[0].requester_id === user.id){
+                        unreserveBtn.classList.remove('hidden')
+                        document.querySelector('.delete-trashure-item-id').value = data.id
+                    }
+                })
+            }
         })
     })
 }
@@ -154,7 +164,6 @@ function getMap() {
         axios.get(url).then(res => {
 
             res.data.forEach(function(data) {
-                console.log(data)
                 if (data.status !== 'expired'){
                     
                     if (data.status === 'available'){
