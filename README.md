@@ -1,6 +1,9 @@
 Trashure App, v. 1.0.0
+
 Team Project
+
 [Try it now](https://heroku.... need to update)
+
 Overview
 🏘 Are you moving out soon? 🚚 Still have some stuff you love but not able to take with you? 🎫 Have spare tickets fot tonight? Give it to someone for free! Share your Trashure!
 
