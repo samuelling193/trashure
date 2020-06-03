@@ -5,9 +5,11 @@ Team Project
 [Try it now](https://heroku.... need to update)
 
 Overview
+
 🏘 Are you moving out soon? 🚚 Still have some stuff you love but not able to take with you? 🎫 Have spare tickets fot tonight? Give it to someone for free! Share your Trashure!
 
-Featutes
+Features
+
 * User can see on the map 🌏 any Trashure Items available in nearby area (user-geolocation feature is implemented)
 * User can sign up and login
 * Registered User can Reserve any available item
@@ -29,6 +31,7 @@ Trashure DB - ERD
 ERD
 
 Challenges and next release Features
+
 One of the main challenges the Team faced with the project is being able to obtain information from a 3d party API, manipulatianig with geodata, storing these data in DB
 
 For Future releases some extra features can be added:
