@@ -2,7 +2,7 @@ Trashure App, v. 1.0.0
 
 Team Project
 
-[Try it now](https://heroku.... need to update)
+[Try it now](https://trashure.herokuapp.com/)
 
 Overview
 
